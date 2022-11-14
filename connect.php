@@ -2,9 +2,7 @@
 
 $con = new mysqli("localhost", "root", "", "todolist");
 
-if($con) {
-    echo "Conntection succesfull ";
-} else {
+if(!$con) {
     die(mysqli_error($con));
 }
 
