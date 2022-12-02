@@ -1,7 +1,30 @@
+main {
+  background-color: whitesmoke;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+}
+
 .contaier {
-  margin: 100px auto;
-  width: 90vw;
+  margin: 0 auto;
+  width: 40vw;
+  background-color: white;
 }
 .contaier .btn-primary {
   margin-bottom: 50px;
+}
+
+.startpageContainer {
+  background-color: whitesmoke;
+  border-radius: 8px;
+  margin: 300px auto;
+  width: 700px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.startpageContainer .marG {
+  margin-top: 20px;
 }/*# sourceMappingURL=stylesheet.css.map */
