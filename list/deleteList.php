@@ -1,5 +1,5 @@
 <?php
-    include 'connect.php';
+    include "../connection/connect.php";
 
     if(isset($_GET['tableName'])) {
 
@@ -9,7 +9,7 @@
         $result = mysqli_query($con, $sql);
 
         if($result) {
-            header("location: list.php");
+            header("location: ../list/createList.php");
         } else {
             die(mysqli_error($con));
         }

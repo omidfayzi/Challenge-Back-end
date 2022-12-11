@@ -1,22 +1,23 @@
 <?php
 
-include "connect.php";
+include "../connection/connect.php";
 
-$updateId = $_GET['updateid'];
 
 if(isset($_POST['submit'])) {
   $naam = $_POST['naam']; 
   $beschrijving = $_POST['beschrijving'];
   $tijdsduur = $_POST['tijdsduur']; 
-  $status = $_POST['status']; 
+  $status = $_POST['status'];
 
-  $sql= "update `todolist` set id=$updateId, naam='$naam', beschrijving='$beschrijving', tijdsduur=$tijdsduur, status='$status' where id=$updateId";
+  $sql= "insert into `anderezaken` (naam, beschrijving, tijdsduur, status) values('$naam', '$beschrijving', '$tijdsduur', '$status')";
   $result = mysqli_query($con, $sql);
 
-
+  if($result) {
+    header('Location:../data/read.php');
+  } else {
+    die(mysqli_error($con));
+  }
 }
-
-
 
 ?>
 
@@ -25,7 +26,7 @@ if(isset($_POST['submit'])) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ToDo updaten</title>
+    <title>ToDo toevoegen</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   </head>
   <body>
@@ -42,15 +43,15 @@ if(isset($_POST['submit'])) {
         <input name="beschrijving" type="text" class="form-control" id="beschrijving" placeholder="voer een beschrijving toe" autocomplete="off">
     </div>
     <div class="mb-3">
-        <label for="tijdsduur" class="form-label">Tijdsduur</label>
-        <input name="tijdsduur" type="text" class="form-control" id="tijdsduur" placeholder="voer de tijdduur in minuten" autocomplete="off">
+        <label for="tijdsduur" class="form-label">Tijdsduur in minuten</label>
+        <input name="tijdsduur" type="number" class="form-control" id="tijdsduur" placeholder="voer de tijduur in minuten" autocomplete="off">
     </div>
     <div class="mb-3">
         <label for="status" class="form-label">Status</label>
-        <input name="statusMark" type="checkbox" id="statusMark" autocomplete="off">
-        <input name="status" type="text" id="status" placeholder="" autocomplete="off" value="niet voldaan">
+        <input name="status" type="text" class="form-control" id="status" value="NIET voldaan">
+        <input name="statusMark" type="checkbox" id="statusMark" autocomplete="off" disabled="disabled">
     </div>
-    <button name="submit" type="submit" class="btn btn-warning">Wijzigen</button>
+    <button name="submit" type="submit" class="btn btn-primary">Toevoegen</button>
     </form>
   </div>
 

@@ -1,6 +1,6 @@
 <?php
 
-include "connect.php";
+include "../connection/connect.php";
 
 if(isset($_POST['submit'])) {
   $listName = $_POST['naam']; 
@@ -17,7 +17,7 @@ if(isset($_POST['submit'])) {
   $result = mysqli_query($con, $sql);
 
   if($result) {
-    header('Location:list.php');
+    header('Location:createList.php');
   } else {
     die(mysqli_error($con));
   }
@@ -40,7 +40,7 @@ if(isset($_POST['submit'])) {
     <form method="post">
     <div class="mb-3">
         <label for="name" class="form-label">Geeft een bijpassende naam aan je lijst</label>
-        <input name="naam" type="text" class="form-control my-3" id="name" placeholder="voer een naam in" autocomplete="off">
+        <input name="naam" type="text" class="form-control my-3" id="name" placeholder="voer een naam in" autocomplete="off" required>
     </div>
     <button name="submit" type="submit" class="btn btn-primary">Toevoegen</button>
     </form>
@@ -48,16 +48,16 @@ if(isset($_POST['submit'])) {
     <table class="table table-striped my-5">
     <thead>
       <tr>
-        <th scope="col">Nummer</th>
+        <th scope="col">nummer</th>
         <th scope="col">lijst</th>
-        <th scope="col">Action</th>
+        <th scope="col">acties</th>
       </tr>
     </thead>
 
     <tbody>
       <?php 
       // GETTING THE DATABASE CONNECTION
-      include 'connect.php';
+      include "../connection/connect.php";
       
       // SELECTING ALL THE TABLES FROM THE DATABASE
 
@@ -67,19 +67,23 @@ if(isset($_POST['submit'])) {
       // DISPLAY THE NUMBER OF TABLES IN THE DATABASE
 
       $totalTables = mysqli_num_rows($tables);
+
+      $counter = 0;
       
     while($fech = mysqli_fetch_assoc($tables)) {
         $arryToString = implode(",", $fech);
         echo '
         <tr>
-        <td scope="row">'.$totalTables.'</td>
+        <td scope="row">'.$counter.'</td>
         <td scope="row">'.$arryToString.'</td>
         <td scope="row">
-            <button class="btn btn-primary"><a href="bekijkList.php?tableName='.$arryToString.'" class="text-light text-decoration-none">Bekijken</a></button>
+            <button class="btn btn-primary"><a href="readList.php?tableName='.$arryToString.'" class="text-light text-decoration-none">Bekijken</a></button>
             <button class="btn btn-warning ms-5"><a href="updateList.php?tableName='.$arryToString.'" class="text-light text-decoration-none">Wijzigen</a></button>
             <button class="btn btn-danger ms-5"><a href="deleteList.php?tableName='.$arryToString.'" class="text-light text-decoration-none">Verwijderen</a></button>
         </td>
       </tr>';
+
+      $counter = ($counter + 1); 
         }; 
       ?>
       <tr>

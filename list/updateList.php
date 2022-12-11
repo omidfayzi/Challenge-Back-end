@@ -1,6 +1,6 @@
 <?php
 
-include "connect.php";
+include "../connection/connect.php";
 
 $tableName = $_GET['tableName'];
 
@@ -10,10 +10,16 @@ if(isset($_POST['submit'])) {
   $sql= "rename table $tableName to $naam";
   $result = mysqli_query($con, $sql);
 
+  if($result) {
+    header('Location:../list/createList.php');
+  } else {
+    die(mysqli_error($con));
+  }
+
 
 }
 
-
+ 
 
 ?>
 
@@ -32,8 +38,9 @@ if(isset($_POST['submit'])) {
     <form method="post">
     <div class="mb-3">
         <label for="name" class="form-label">Lijst naam</label>
-        <input name="naam" type="text" class="form-control" id="name" placeholder="voer een nieuwe lijst naam in" autocomplete="off">
+        <input name="naam" type="text" class="form-control" id="name" placeholder="Vul een nieuwe lijst naam in" autocomplete="off">
     </div>
+    <button name="submit" type="submit" class="btn btn-warning">Wijzigen</button>
   </div>
 
 
