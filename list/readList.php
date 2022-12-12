@@ -1,6 +1,6 @@
 <?php
-include "../connection/connect.php";
-$tableName = $_GET['tableName'];
+      include "../connection/connect.php";
+      $tableName = $_GET['tableName'];
 ?>
 
 <!doctype html>
@@ -16,9 +16,7 @@ $tableName = $_GET['tableName'];
   
   <div class="container my-5">
     <?php 
-      echo `
-      <button name="submit" type="submit" class="btn btn-primary"><a class="text-light text-decoration-none" href="../data/create.php?tableName='.$tableName.'">todo toevoegen</a></button>
-      `;
+      echo '<button name="submit" type="submit" class="btn btn-primary"><a class="text-light text-decoration-none" href="../data/create.php?tableName='.$tableName.'">todo toevoegen</a></button>';
     ?>
     </form>
 
@@ -37,34 +35,36 @@ $tableName = $_GET['tableName'];
     <tbody>
       <?php
 
-      $sql = "select * from $tableName";
-      $result = mysqli_query($con, $sql);
+          if(isset($_GET['tableName'])) {
 
-      if($result) {
-        while($fech = mysqli_fetch_assoc($result)) {
-      
-          $row = mysqli_fetch_assoc($result);
-          
-          $id = $row['id'];
-          $naam = $row['naam'];
-          $beschrijving = $row['beschrijving'];
-          $tijdsduur = $row['tijdsduur'];
-          $status = $row['status'];
-           
-          echo '
-            <tr>
-            <td scope="row">'.$id.'</td>
-            <td scope="row">'.$naam.'</td>
-            <td scope="row">'.$beschrijving.'</td>
-            <td scope="row">'.$tijdsduur.'</td>
-            <td scope="row">'.$status.'</td>
-            <td scope="row">
-                <button class="btn btn-warning ms-5"><a href="updateList.php?updateid='.$id.'&tableName='.$tableName.'" class="text-light text-decoration-none">Wijzigen</a></button>
-                <button class="btn btn-danger ms-5"><a href="deleteList.php?deleteid='.$id.'&tableName='.$tableName.'" class="text-light text-decoration-none">Verwijderen</a></button>
-            </td>
-          </tr>';
+            $sql = "select * from $tableName";
+            $result = mysqli_query($con, $sql);
+
+
+            
+
+            while($row = mysqli_fetch_assoc($result)) {
+              
+              $id = $row['id'];
+              $naam = $row['naam'];
+              $beschrijving = $row['beschrijving'];
+              $tijdsduur = $row['tijdsduur'];
+              $status = $row['status'];
+               
+              echo '
+                <tr>
+                <td scope="row">'.$id.'</td>
+                <td scope="row">'.$naam.'</td>
+                <td scope="row">'.$beschrijving.'</td>
+                <td scope="row">'.$tijdsduur.'</td>
+                <td scope="row">'.$status.'</td>
+                <td scope="row">
+                    <button class="btn btn-warning ms-5"><a href="../data/update.php?updateid='.$id.'&tableName='.$tableName.'" class="text-light text-decoration-none">Wijzigen</a></button>
+                    <button class="btn btn-danger ms-5"><a href="../data/delete.php?deleteid='.$id.'&tableName='.$tableName.'" class="text-light text-decoration-none">Verwijderen</a></button>
+                </td>
+              </tr>';
             }; 
-      }
+            }
       ?>
       <tr>
     </tbody>

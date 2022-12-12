@@ -1,19 +1,16 @@
 <?php
-    include '/Connection/connect.php';
+    include "../connection/connect.php";
 
-    if(isset($_GET['deleteid'])) {
+    $deleteid = $_GET['deleteid'];
+    $tableName = $_GET['tableName'];
 
-        $tableName = $_GET['tableName']
-        $deleteid = $_GET['deleteid'];
-
-        $sql = "delete from  $tableName WHERE id=$id";
-        $result = mysqli_query($con, $sql);
-
-        if($result) {
-            header("location: ../data/read.php");
-        } else {
-            die(mysqli_error($con));
-        }
-
+    $sql = "delete from  $tableName WHERE id=$deleteid";
+    $result = mysqli_query($con, $sql);
+       
+    if($result) {
+        header('location: ../list/readList.php?tableName='.$tableName.'');
+    } else {
+        die(mysqli_error($con));
     }
+    
 ?>

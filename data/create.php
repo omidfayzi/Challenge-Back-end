@@ -2,6 +2,7 @@
 
 include "../connection/connect.php";
 
+$tableName = $_GET['tableName'];
 
 if(isset($_POST['submit'])) {
   $naam = $_POST['naam']; 
@@ -9,11 +10,11 @@ if(isset($_POST['submit'])) {
   $tijdsduur = $_POST['tijdsduur']; 
   $status = $_POST['status'];
 
-  $sql= "insert into `anderezaken` (naam, beschrijving, tijdsduur, status) values('$naam', '$beschrijving', '$tijdsduur', '$status')";
+  $sql= "insert into $tableName (naam, beschrijving, tijdsduur, status) values('$naam', '$beschrijving', '$tijdsduur', '$status')";
   $result = mysqli_query($con, $sql);
 
   if($result) {
-    header('Location:../data/read.php');
+    header('Location:../list/readList.php?tableName='.$tableName.'');
   } else {
     die(mysqli_error($con));
   }
@@ -36,15 +37,15 @@ if(isset($_POST['submit'])) {
     <form method="post">
     <div class="mb-3">
         <label for="name" class="form-label">Naam</label>
-        <input name="naam" type="text" class="form-control" id="name" placeholder="voer een naam toe" autocomplete="off">
+        <input name="naam" type="text" class="form-control" id="name" placeholder="vul een naam toe" autocomplete="off">
     </div>
     <div class="mb-3">
         <label for="beschrijving" class="form-label">Beschrijving</label>
-        <input name="beschrijving" type="text" class="form-control" id="beschrijving" placeholder="voer een beschrijving toe" autocomplete="off">
+        <input name="beschrijving" type="text" class="form-control" id="beschrijving" placeholder="vul een beschrijving toe" autocomplete="off">
     </div>
     <div class="mb-3">
         <label for="tijdsduur" class="form-label">Tijdsduur in minuten</label>
-        <input name="tijdsduur" type="number" class="form-control" id="tijdsduur" placeholder="voer de tijduur in minuten" autocomplete="off">
+        <input name="tijdsduur" type="number" class="form-control" id="tijdsduur" placeholder="vul de tijduur in minuten" autocomplete="off">
     </div>
     <div class="mb-3">
         <label for="status" class="form-label">Status</label>

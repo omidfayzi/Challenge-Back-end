@@ -1,9 +1,9 @@
 <?php
 
-include "connect.php";
+include "../connection/connect.php";
 
-$tableName = $_GET['tableName']
-$updateId = $_GET['updateid'];
+$updateid = $_GET['updateid'];
+$tableName = $_GET['tableName'];
 
 if(isset($_POST['submit'])) {
   $naam = $_POST['naam']; 
@@ -14,6 +14,11 @@ if(isset($_POST['submit'])) {
   $sql= "update $tableName set id=$updateId, naam='$naam', beschrijving='$beschrijving', tijdsduur=$tijdsduur, status='$status' where id=$updateId";
   $result = mysqli_query($con, $sql);
 
+  if($result) {
+    header('Location:../list/readList.php');
+  } else {
+    die(mysqli_error($con));
+  }
 
 }
 
