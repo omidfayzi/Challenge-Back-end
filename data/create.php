@@ -49,8 +49,8 @@ if(isset($_POST['submit'])) {
     </div>
     <div class="mb-3">
         <label for="status" class="form-label">Status</label>
-        <input name="status" type="text" class="form-control" id="status" value="NIET voldaan">
-        <input name="statusMark" type="checkbox" id="statusMark" autocomplete="off" disabled="disabled">
+        <input name="statusMark" type="checkbox"  class="my-2" id="statusMark" autocomplete="off" disabled="disabled">
+        <input name="status" type="text" class="form-control invisible my-0" id="status" value="NIET voldaan">
     </div>
     <button name="submit" type="submit" class="btn btn-primary">Toevoegen</button>
     </form>

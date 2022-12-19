@@ -27,4 +27,49 @@ main {
 }
 .startpageContainer .marG {
   margin-top: 20px;
+}
+
+#dataContainer {
+  display: flex;
+  justify-content: right;
+  align-content: center;
+  margin-top: 20px;
+}
+#dataContainer p {
+  font-weight: bold;
+  margin: 0px;
+}
+#dataContainer #formData {
+  border: 1px solid #0d6efd;
+  border-radius: 8px;
+  margin-left: 15px;
+  padding: 2.5px;
+}
+
+.childRow {
+  background-color: green;
+}
+
+.container-lg {
+  background-color: whitesmoke;
+  border: 2px solid red;
+  margin-top: 50px;
+}
+.container-lg .container-md p {
+  margin: 20px;
+  display: inline;
+}
+.container-lg .container-md button {
+  height: 40px;
+  margin: 0px;
+  padding: 0px 10px 0px 10px;
+}
+.container-lg .container-md .container-s {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.container-lg .container-md .container-s .button-container {
+  display: flex;
+  width: 400px;
 }/*# sourceMappingURL=stylesheet.css.map */

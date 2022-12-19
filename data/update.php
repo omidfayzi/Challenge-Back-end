@@ -11,11 +11,11 @@ if(isset($_POST['submit'])) {
   $tijdsduur = $_POST['tijdsduur']; 
   $status = $_POST['status']; 
 
-  $sql= "update $tableName set id=$updateId, naam='$naam', beschrijving='$beschrijving', tijdsduur=$tijdsduur, status='$status' where id=$updateId";
+  $sql= "update $tableName set id=$updateid, naam='$naam', beschrijving='$beschrijving', tijdsduur=$tijdsduur, status='$status' where id=$updateid";
   $result = mysqli_query($con, $sql);
 
   if($result) {
-    header('Location:../list/readList.php');
+    header('Location:../list/readList.php?tableName='.$tableName.'');
   } else {
     die(mysqli_error($con));
   }
@@ -41,20 +41,20 @@ if(isset($_POST['submit'])) {
     <form method="post">
     <div class="mb-3">
         <label for="name" class="form-label">Naam</label>
-        <input name="naam" type="text" class="form-control" id="name" placeholder="voer een naam toe" autocomplete="off">
+        <input name="naam" type="text" class="form-control" id="name" placeholder="vul een naam toe" autocomplete="off" required>
     </div>
     <div class="mb-3">
         <label for="beschrijving" class="form-label">Beschrijving</label>
-        <input name="beschrijving" type="text" class="form-control" id="beschrijving" placeholder="voer een beschrijving toe" autocomplete="off">
+        <input name="beschrijving" type="text" class="form-control" id="beschrijving" placeholder="vul een beschrijving toe" autocomplete="off" required>
     </div>
     <div class="mb-3">
         <label for="tijdsduur" class="form-label">Tijdsduur</label>
-        <input name="tijdsduur" type="text" class="form-control" id="tijdsduur" placeholder="voer de tijdduur in minuten" autocomplete="off">
+        <input name="tijdsduur" type="text" class="form-control" id="tijdsduur" placeholder="vul de tijdduur in minuten" autocomplete="off" required>
     </div>
     <div class="mb-3">
         <label for="status" class="form-label">Status</label>
         <input name="statusMark" type="checkbox" id="statusMark" autocomplete="off">
-        <input name="status" type="text" id="status" placeholder="" autocomplete="off" value="niet voldaan">
+        <input name="status" type="text" id="status" placeholder="" autocomplete="off" value="NIET voldaan" required>
     </div>
     <button name="submit" type="submit" class="btn btn-warning">Wijzigen</button>
     </form>
@@ -62,6 +62,6 @@ if(isset($_POST['submit'])) {
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <script src="../style/script.js"></script>
   </body>
 </html>

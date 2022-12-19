@@ -31,11 +31,11 @@ if(isset($_POST['submit'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>To Do List aanmaken</title>
+    <link href="../style/stylesheet.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   </head>
   <body>
 
-  
   <div class="container my-5">
     <form method="post">
     <div class="mb-3">
@@ -44,18 +44,7 @@ if(isset($_POST['submit'])) {
     </div>
     <button name="submit" type="submit" class="btn btn-primary">Toevoegen</button>
     </form>
-
-    <table class="table table-striped my-5">
-    <thead>
-      <tr>
-        <th scope="col">nummer</th>
-        <th scope="col">lijst</th>
-        <th scope="col">acties</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <?php 
+    <?php 
       // GETTING THE DATABASE CONNECTION
       include "../connection/connect.php";
       
@@ -72,23 +61,71 @@ if(isset($_POST['submit'])) {
       
     while($fech = mysqli_fetch_assoc($tables)) {
         $arryToString = implode(",", $fech);
-        echo '
-        <tr>
-        <td scope="row">'.$counter.'</td>
-        <td scope="row">'.$arryToString.'</td>
-        <td scope="row">
-            <button class="btn btn-primary"><a href="readList.php?tableName='.$arryToString.'" class="text-light text-decoration-none">Bekijken</a></button>
-            <button class="btn btn-warning ms-5"><a href="updateList.php?tableName='.$arryToString.'" class="text-light text-decoration-none">Wijzigen</a></button>
-            <button class="btn btn-danger ms-5"><a href="deleteList.php?tableName='.$arryToString.'" class="text-light text-decoration-none">Verwijderen</a></button>
-        </td>
-      </tr>';
+
+        
+        $sql = "select * from $arryToString";
+        $result = mysqli_query($con, $sql);
+
+        while($row = mysqli_fetch_assoc($result)) {
+          
+          $id = $row['id'];
+          $naam = $row['naam'];
+          $beschrijving = $row['beschrijving'];
+          $tijdsduur = $row['tijdsduur'];
+          $status = $row['status'];
+
+          echo '
+          <div class="container-lg">
+            <div class="container-md">
+                <div class="container-s">
+                    <div>
+                        <p>'.$counter.'</p>
+                        <p>'.$arryToString.'</p>
+                    </div>
+                    <div class="button-container">
+                        <button class="btn btn-primary"><a href="readList.php?tableName='.$arryToString.'" class="text-light text-decoration-none">Bekijken</a></button>
+                        <button class="btn btn-warning ms-5"><a href="updateList.php?tableName='.$arryToString.'" class="text-light text-decoration-none">Wijzigen</a></button>
+                        <button class="btn btn-danger ms-5"><a href="deleteList.php?tableName='.$arryToString.'" class="text-light text-decoration-none">Verwijderen</a></button>
+                    </div>
+                </div>
+                  <div>
+                      <table class="table table-striped my-5">
+                          <thead>
+                            <tr>
+                              <th scope="col">id</th>
+                              <th scope="col">naam</th>
+                              <th scope="col">beschrijving</th>
+                              <th scope="col">tijdsduur</th>
+                              <th scope="col">status</th>
+                              <th scope="col">functies</th>
+                            </tr>
+                          </thead>
+                      
+                          <tbody>
+                              <tr>
+                              <td scope="row">'.$id.'</td>
+                              <td scope="row">'.$naam.'</td>
+                              <td scope="row">'.$beschrijving.'</td>
+                              <td scope="row">'.$tijdsduur.'</td>
+                              <td scope="row" id="status">'.$status.'</td>
+                              <td scope="row">
+                                  <button class="btn btn-warning ms-5"><a href="../data/update.php?updateid='.$id.'&tableName='.$tableName.'" class="text-light text-decoration-none">Wijzigen</a></button>
+                                  <button class="btn btn-danger ms-5"><a href="../data/delete.php?deleteid='.$id.'&tableName='.$tableName.'" class="text-light text-decoration-none">Verwijderen</a></button>
+                              </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+            </div>
+          </div>
+          
+          ';
+
+        }
 
       $counter = ($counter + 1); 
         }; 
       ?>
-      <tr>
-    </tbody>
-  </table>
   </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="script.js"></script>

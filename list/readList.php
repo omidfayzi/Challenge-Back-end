@@ -9,10 +9,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>To Do List aanmaken</title>
+    <link href="../style/stylesheet.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   </head>
   <body>
 
+  <div class="container" id="dataContainer">
+    <p>soorteren</p>
+    <form method="post" id="data">
+      <select name="data" id="formData" onchange="this.form.submit();">
+          <option selected value="sorteren">NIET voldaan</option>
+          <option value="sorteren">sorteren op</option>
+          <option value="sorteren">tijdsduur</option>
+          <option value="sorteren">voldaan</option>
+      </select>
+    </form>
+  </div>
   
   <div class="container my-5">
     <?php 
@@ -36,12 +48,9 @@
       <?php
 
           if(isset($_GET['tableName'])) {
-
+            
             $sql = "select * from $tableName";
             $result = mysqli_query($con, $sql);
-
-
-            
 
             while($row = mysqli_fetch_assoc($result)) {
               
@@ -52,19 +61,22 @@
               $status = $row['status'];
                
               echo '
-                <tr>
-                <td scope="row">'.$id.'</td>
-                <td scope="row">'.$naam.'</td>
-                <td scope="row">'.$beschrijving.'</td>
-                <td scope="row">'.$tijdsduur.'</td>
-                <td scope="row">'.$status.'</td>
-                <td scope="row">
-                    <button class="btn btn-warning ms-5"><a href="../data/update.php?updateid='.$id.'&tableName='.$tableName.'" class="text-light text-decoration-none">Wijzigen</a></button>
-                    <button class="btn btn-danger ms-5"><a href="../data/delete.php?deleteid='.$id.'&tableName='.$tableName.'" class="text-light text-decoration-none">Verwijderen</a></button>
-                </td>
-              </tr>';
+                  <tr>
+                  <td scope="row">'.$id.'</td>
+                  <td scope="row">'.$naam.'</td>
+                  <td scope="row">'.$beschrijving.'</td>
+                  <td scope="row">'.$tijdsduur.'</td>
+                  <td scope="row" id="status">'.$status.'</td>
+                  <td scope="row">
+                      <button class="btn btn-warning ms-5"><a href="../data/update.php?updateid='.$id.'&tableName='.$tableName.'" class="text-light text-decoration-none">Wijzigen</a></button>
+                      <button class="btn btn-danger ms-5"><a href="../data/delete.php?deleteid='.$id.'&tableName='.$tableName.'" class="text-light text-decoration-none">Verwijderen</a></button>
+                  </td>
+                  </tr>
+                ';
+
             }; 
             }
+            
       ?>
       <tr>
     </tbody>

@@ -3,11 +3,14 @@ var statusMark = document.getElementById('statusMark');
 
 statusText.style.visibility = "hidden";
 
-
 statusMark.addEventListener('change', function () {
-    statusText.value = "voldaan";
-
+    if(statusText.value == "voldaan") {
+        statusText.value = "NIET voldaan";
+    } else if(statusText.value == "NIET voldaan") {
+        statusText.value = "voldaan"
+    }
     console.log(statusText.value)
 })
+
 
 
