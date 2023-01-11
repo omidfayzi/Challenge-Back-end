@@ -8,7 +8,7 @@
     $result = mysqli_query($con, $sql);
        
     if($result) {
-        header('location: ../list/readList.php?tableName='.$tableName.'');
+        header('location: ../list/createList.php?tableName='.$tableName.'');
     } else {
         die(mysqli_error($con));
     }

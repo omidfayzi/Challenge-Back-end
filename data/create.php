@@ -14,7 +14,7 @@ if(isset($_POST['submit'])) {
   $result = mysqli_query($con, $sql);
 
   if($result) {
-    header('Location:../list/readList.php?tableName='.$tableName.'');
+    header('Location:../list/createList.php?tableName='.$tableName.'');
   } else {
     die(mysqli_error($con));
   }

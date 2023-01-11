@@ -52,12 +52,14 @@ main {
 
 .container-lg {
   background-color: whitesmoke;
-  border: 2px solid red;
+  border-radius: 8px;
   margin-top: 50px;
+  padding: 10px 30px 20px 50px;
 }
 .container-lg .container-md p {
   margin: 20px;
   display: inline;
+  font-weight: bold;
 }
 .container-lg .container-md button {
   height: 40px;
@@ -65,6 +67,7 @@ main {
   padding: 0px 10px 0px 10px;
 }
 .container-lg .container-md .container-s {
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
@@ -72,4 +75,18 @@ main {
 .container-lg .container-md .container-s .button-container {
   display: flex;
   width: 400px;
+}
+
+#filter {
+  border: 1px solid #0d6efd;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.filterContainer {
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+.filterContainer label {
+  margin-left: 20px;
 }/*# sourceMappingURL=stylesheet.css.map */

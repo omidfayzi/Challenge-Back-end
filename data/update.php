@@ -15,14 +15,12 @@ if(isset($_POST['submit'])) {
   $result = mysqli_query($con, $sql);
 
   if($result) {
-    header('Location:../list/readList.php?tableName='.$tableName.'');
+    header('Location:../list/createList.php?tableName='.$tableName.'');
   } else {
     die(mysqli_error($con));
   }
 
 }
-
-
 
 ?>
 
@@ -36,30 +34,52 @@ if(isset($_POST['submit'])) {
   </head>
   <body>
 
-  
-  <div class="container my-5">
-    <form method="post">
-    <div class="mb-3">
-        <label for="name" class="form-label">Naam</label>
-        <input name="naam" type="text" class="form-control" id="name" placeholder="vul een naam toe" autocomplete="off" required>
-    </div>
-    <div class="mb-3">
-        <label for="beschrijving" class="form-label">Beschrijving</label>
-        <input name="beschrijving" type="text" class="form-control" id="beschrijving" placeholder="vul een beschrijving toe" autocomplete="off" required>
-    </div>
-    <div class="mb-3">
-        <label for="tijdsduur" class="form-label">Tijdsduur</label>
-        <input name="tijdsduur" type="text" class="form-control" id="tijdsduur" placeholder="vul de tijdduur in minuten" autocomplete="off" required>
-    </div>
-    <div class="mb-3">
-        <label for="status" class="form-label">Status</label>
-        <input name="statusMark" type="checkbox" id="statusMark" autocomplete="off">
-        <input name="status" type="text" id="status" placeholder="" autocomplete="off" value="NIET voldaan" required>
-    </div>
-    <button name="submit" type="submit" class="btn btn-warning">Wijzigen</button>
-    </form>
-  </div>
+<div class="container my-5">
+        <form method="post">
 
+        <?PHP
+  
+  if(isset($_GET['tableName'])) {
+    
+    $sql = "select * from $tableName where id=$updateid";
+    $result = mysqli_query($con, $sql);
+
+    if($row = mysqli_fetch_assoc($result)) {
+          
+      $id = $row['id'];
+      $naam = $row['naam'];
+      $beschrijving = $row['beschrijving'];
+      $tijdsduur = $row['tijdsduur'];
+      $status = $row['status']; 
+
+      echo '<div class="mb-3">';
+        echo '<label for="name" class="form-label">Naam</label>';
+        echo '<input name="naam" value="'.$naam.'" type="text" class="form-control" id="name" placeholder="vul een naam toe" autocomplete="off" required>';
+      echo '</div>';
+
+      echo '<div class="mb-3">';
+      echo '<label for="beschrijving" class="form-label">Beschrijving</label>';
+      echo '<input name="beschrijving" value="'.$beschrijving.'" type="text" class="form-control" id="beschrijving" placeholder="vul een beschrijving toe" autocomplete="off" required>';
+      echo '</div>';
+
+      echo '<div class="mb-3">';
+      echo '<label for="tijdsduur" class="form-label">Tijdsduur</label>';
+      echo '<input name="tijdsduur" value="'.$tijdsduur.'" type="text" class="form-control" id="tijdsduur" placeholder="vul de tijdduur in minuten" autocomplete="off" required>';
+      echo '</div>';
+    }
+  }
+  
+  ?>
+        <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select name="status">
+                <option value="'NIET voldaan">NIET voldaan</option>
+                <option value="voldaan">voldaan</option>
+            </select>
+        </div>
+        <button name="submit" type="submit" class="btn btn-warning">Wijzigen</button>
+        </form>
+      </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="../style/script.js"></script>
