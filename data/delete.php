@@ -2,13 +2,12 @@
     include "../connection/connect.php";
 
     $deleteid = $_GET['deleteid'];
-    $tableName = $_GET['tableName'];
 
-    $sql = "delete from  $tableName WHERE id=$deleteid";
+    $sql = "delete from items WHERE id=$deleteid";
     $result = mysqli_query($con, $sql);
        
     if($result) {
-        header('location: ../list/createList.php?tableName='.$tableName.'');
+        header('location: ../list/readList.php?');
     } else {
         die(mysqli_error($con));
     }

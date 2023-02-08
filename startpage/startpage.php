@@ -12,7 +12,7 @@
     <div class="startpageContainer">
     <h1 class="marG">Welkom</h1>
     <p class="marG">Klik op 'lijst aanmaken' om een nieuwe todolist aan te maken</p>
-    <button type="button" class="btn btn-secondary marG"><a class="text-light text-decoration-none" href="../list/createList.php">lijst aanmaken</a></button>
+    <button type="button" class="btn btn-secondary marG"><a class="text-light text-decoration-none" href="../list/readList.php">lijst aanmaken</a></button>
     </div>
     
 
