@@ -16,8 +16,7 @@
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
             <select name="status">
-                <?php include "filterStatus.php";?>
-                
+              <?php include "filterStatus.php";?>
             </select>
         </div>
         <button name="submit" type="submit" class="btn btn-warning">Wijzigen</button>
